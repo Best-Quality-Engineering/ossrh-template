@@ -83,6 +83,9 @@ git add deploy/settings-security.xml.enc
 ```
 
 ### Required Environment Variables
+The following environment variables need to be defined to deploy locally and will need to be exposed as 
+secret environment variables in your TravisCI settings:
+
 |Variable Name|Purpose|
 |:------------|:------|
 | `OSSRH_USERNAME`| Maven Central username |
