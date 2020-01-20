@@ -28,6 +28,10 @@ parameters need to encrypt subsequent files, so save them in a safe location:
 travis encrypt-file deploy/code-signing-key.asc deploy/code-signing-key.asc.enc --com --print-key
 ```
 
+After this command completes, update the encrypted key (`$encrypted_XXXXXXXXXX_key`) and 
+iv (`$encrypted_XXXXXXXXXX_key`) variable names in `.travis.yml` with the correct values from
+your TravisCI settings.
+
 :exclamation: **Ensure that `deploy/code-signing-key.asc` is moved out of the project directory.** Then add the
 file:
 ```sh
