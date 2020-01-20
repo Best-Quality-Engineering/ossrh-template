@@ -1,13 +1,15 @@
 # Java OSSRH Template
-This repository contains the scaffolding necessary to build and deploy to Maven Central, 
-along with a Travis CI configuration that supports deploying snapshot builds and 
-automatic releasing from a tag.
+This is a repository template that contains the scaffolding necessary to build and continuously deploy an open source 
+Java project to [Maven Central](https://central.sonatype.org), a [Travis CI](https://travis-ci.com) configuration for 
+deploying snapshot builds with automatic releasing from a tag, and uploading JaCoCo code coverage reports to 
+[Codecov](https://codecov.io)
 
 ## Open Sonatype OSSRH Account
-If not already done, ensure an account has been created with OSSRH.
+If not already done, ensure an account has been created with [OSSRH](https://central.sonatype.org/pages/ossrh-guide.html).
 
 * Create an issue: Community Support - Open Source Project Repository Hosting
-* Add DNS TXT Record referencing ticket, i.e. `OSSRH-54345`
+* If your `group` references a domain, add a DNS TXT Record referencing the ticket id (i.e. `OSSRH-54345`) as soon as the 
+  issue is created. This will decrease turn-around time.
 * Once issue has been resolved
     * Deploy artifacts to staging repository (https://oss.sonatype.org/#stagingRepositories)
     * Comment on ticket when first release is promoted (https://central.sonatype.org/pages/releasing-the-deployment.html) 

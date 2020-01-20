@@ -31,6 +31,9 @@ find . -name pom.xml -exec git add {} \;
 git commit -m "Release ${TRAVIS_TAG} (build: ${TRAVIS_BUILD_NUMBER})"
 git push -u origin release/${TRAVIS_TAG}
 
+echo "Uploading code coverage report for ${TRAVIS_TAG}"
+bash <(curl -s https://codecov.io/bash)
+
 echo "Merging release/${TRAVIS_TAG} into master"
 git checkout master
 git pull
