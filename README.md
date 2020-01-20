@@ -22,7 +22,7 @@ gpg -a --export-secret-key <KEYID> > deploy/code-signing-key.asc
 ```
 
 Next, use `travis` CLI to encrypt the code signing private key. This command will output the `key` and `iv`
-parameters need to encrypt subsequent files, so save them in a safe location:
+parameters needed to encrypt multiple files, so save them in a safe location:
 
 ```sh
 travis encrypt-file deploy/code-signing-key.asc deploy/code-signing-key.asc.enc --com --print-key
