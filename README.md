@@ -1,4 +1,4 @@
-# Java OSS Template
+# Java OSSRH Template
 This repository contains the scaffolding necessary to build and deploy to Maven Central, 
 along with a Travis CI configuration that supports deploying snapshot builds and 
 automatic releasing from a tag.
