@@ -4,11 +4,16 @@ along with a Travis CI configuration that supports deploying snapshot builds and
 automatic releasing from a tag.
 
 ## Open Sonatype OSSRH Account
+If not already done, ensure an account has been created with OSSRH.
+
 * Create an issue: Community Support - Open Source Project Repository Hosting
 * Add DNS TXT Record referencing ticket, i.e. `OSSRH-54345`
 * Once issue has been resolved
     * Deploy artifacts to staging repository (https://oss.sonatype.org/#stagingRepositories)
-    * Comment on ticket when first release is promoted (https://central.sonatype.org/pages/releasing-the-deployment.html)  
+    * Comment on ticket when first release is promoted (https://central.sonatype.org/pages/releasing-the-deployment.html) 
+      to activate syncing with Maven Central 
+    * Grab the repository's profile identifier from the Nexus Repository Manager by selecting the staging profile and 
+      examining the url: (https://oss.sonatype.org/#stagingProfiles;<PROFILE-ID>)
 
 ## Project Bootstrapping
 In order to continuously deploy to OSSRH from Travis CI, there a some prerequisites:
@@ -22,15 +27,16 @@ gpg -a --export-secret-key <KEYID> > deploy/code-signing-key.asc
 ```
 
 Next, use `travis` CLI to encrypt the code signing private key. This command will output the `key` and `iv`
-parameters needed to encrypt multiple files, so save them in a safe location:
+parameters needed to individually encrypt multiple files. They will be referenced in later steps, so save 
+them in a safe location:
 
 ```sh
 travis encrypt-file deploy/code-signing-key.asc deploy/code-signing-key.asc.enc --com --print-key
 ```
 
-After this command completes, update the encrypted key (`$encrypted_XXXXXXXXXX_key`) and 
-iv (`$encrypted_XXXXXXXXXX_key`) variable names in `.travis.yml` with the correct values from
-your TravisCI settings.
+After this command completes it will report the variable names to use in `.travis.yml`, so update the 
+encrypted key (`$encrypted_XXXXXXXXXX_key`) and iv (`$encrypted_XXXXXXXXXX_key`) variable names with 
+the correct values. The names can also be retrieved from the repository settings screen.
 
 :exclamation: **Ensure that `deploy/code-signing-key.asc` is moved out of the project directory.** Then add the
 file:
@@ -97,6 +103,21 @@ secret environment variables in your TravisCI settings:
 | `CODE_SIGNING_KEY_FINGERPRINT`| Code signing key identifier |
 | `CODE_SIGNING_KEY_PASSPHRASE`| Code signing key passphrase |
 | `CODECOV_TOKEN`| Codecov.io token for code coverage reports |
+
+## Checklist
+Here is a handy checklist required to complete project scaffolding:
+
+- [ ] Setup encoded OSSRH code signing key
+- [ ] Setup encoded GitHub deploy key
+- [ ] Setup encoded Maven `settings-security.xml`
+- [ ] Update `.travis.yml` to use TravisCI repository encryption key and initialization vector variables
+- [ ] Update `pom.xml` with project specific information:
+  - [ ] Fill out the `GAV`, `name`, and `description` elements
+  - [ ] Set the `project.staging.profile` property to the OSSRH staging profile identifier
+  - [ ] Set the `repository.slug` to match GitHub in the form of `owner-name/repository-name`
+  - [ ] Fill out the required `<developers>` element
+- [ ] Define environment variables for local deployment
+- [ ] Define TravisCI secret variables for continuous deployment
 
 # `README.md` Template
 [![Build Status](https://img.shields.io/travis/ruffkat/XXX/master?color=green)](https://travis-ci.com/ruffkat/XXX)

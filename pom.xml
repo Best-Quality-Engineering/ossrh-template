@@ -9,10 +9,16 @@
         <version>0.0.2</version>
     </parent>
 
-    <artifactId>ossrh-template</artifactId>
+    <groupId></groupId>
+    <artifactId></artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>OSSRH Template</name>
-    <description>Maven Central Template Project</description>
+    <name></name>
+    <description></description>
+
+    <properties>
+        <project.staging.profile></project.staging.profile>
+        <repository.slug></repository.slug>
+    </properties>
 
     <developers>
         <developer>
@@ -21,11 +27,6 @@
             <email></email>
         </developer>
     </developers>
-
-    <properties>
-        <project.staging.profile>OSSRH Staging Profile Identifier</project.staging.profile>
-        <repository.slug>owner-name/repository-name</repository.slug>
-    </properties>
 
     <dependencies>
         <dependency>
