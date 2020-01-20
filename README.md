@@ -111,6 +111,6 @@ Project description
 <dependency>
   <groupId>io.bestquality</groupId>
   <artifactId>XXX</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.0</version>
 </dependency>
 ```
