@@ -22,13 +22,13 @@ gpg -a --export-secret-key <KEYID> > deploy/code-signing-key.asc
 ```
 
 Next, use `travis` CLI to encrypt the code signing private key. This command will output the `key` and `iv`
-parameters need to encrypt subsequent files, so save them is a safe location:
+parameters need to encrypt subsequent files, so save them in a safe location:
 
 ```sh
 travis encrypt-file deploy/code-signing-key.asc deploy/code-signing-key.asc.enc --com --print-key
 ```
 
-**Ensure that `deploy/code-signing-key.asc` is moved out of the deploy directory.** Then add the
+:exclamation: **Ensure that `deploy/code-signing-key.asc` is moved out of the deploy directory.** Then add the
 file:
 ```sh
 git add deploy/code-signing-key.asc.enc
@@ -49,7 +49,7 @@ parameters from the previous step:
 travis encrypt-file deploy/id_rsa deploy/id_rsa.enc --com --key <key> --iv <iv>
 ```
 
-**Ensure that `deploy/id_rsa` is moved out of the deploy directory and to a safe location.** Then add the file:
+:exclamation: **Ensure that `deploy/id_rsa` is moved out of the deploy directory and to a safe location.** Then add the file:
 ```sh
 git add deploy/id_rsa.enc
 ```
@@ -77,7 +77,7 @@ Use the `travis` utility to encrypt the file for use during the build:
 travis encrypt-file deploy/settings-security.xml deploy/settings-security.xml.enc --com --key <key> --iv <iv>
 ```
 
-**Ensure that `deploy/settings-security.xml` is moved out of the deploy directory.** Then add the file:
+:exclamation: **Ensure that `deploy/settings-security.xml` is moved out of the deploy directory.** Then add the file:
 ```sh
 git add deploy/settings-security.xml.enc
 ```
